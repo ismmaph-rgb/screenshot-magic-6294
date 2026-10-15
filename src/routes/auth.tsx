@@ -14,7 +14,7 @@ function safePath(p: unknown) {
 }
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (s: Record<string, unknown>) => ({ redirect: typeof s.redirect === "string" ? s.redirect : undefined }),
+  validateSearch: (s: Record<string, unknown>): { redirect?: string } => ({ redirect: typeof s["redirect"] === "string" ? s["redirect"] : undefined }),
   head: () => ({
     meta: [
       { title: "Ingresar — EGRESANTOS" },
@@ -68,7 +68,7 @@ function AuthPage() {
       email, password, options: { emailRedirectTo: window.location.origin + target, data: { full_name: name } },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Te enviamos un correo para confirmar tu cuenta.");
   }
   async function google() {
@@ -76,9 +76,9 @@ function AuthPage() {
     if (r.error) toast.error("No pudimos iniciar sesión con Google");
   }
   async function forgot() {
-    if (!email) return toast.error("Ingresá tu correo primero");
+    if (!email) { toast.error("Ingresá tu correo primero"); return; }
     const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/reset-password` });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Te enviamos un enlace para restablecer la contraseña.");
   }
 
