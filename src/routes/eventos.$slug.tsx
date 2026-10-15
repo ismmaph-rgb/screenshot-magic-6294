@@ -17,7 +17,7 @@ const eventQuery = (slug: string) =>
   queryOptions({ queryKey: ["public-event", slug], queryFn: () => getPublicEvent({ data: { slug } }) });
 
 export const Route = createFileRoute("/eventos/$slug")({
-  validateSearch: (s: Record<string, unknown>) => ({ ref: typeof s.ref === "string" ? s.ref : undefined }),
+  validateSearch: (s: Record<string, unknown>): { ref?: string } => ({ ref: typeof s["ref"] === "string" ? s["ref"] : undefined }),
   loader: async ({ context, params }) => {
     const ev = await context.queryClient.ensureQueryData(eventQuery(params.slug));
     if (!ev) throw notFound();
@@ -66,7 +66,7 @@ function EventPage() {
     if (ref) window.localStorage.setItem("egr_ref", ref);
   }, [ref]);
   useEffect(() => {
-    if (user) setBuyer((b) => ({ ...b, email: b.email || user.email || "", name: b.name || (user.user_metadata?.full_name ?? "") }));
+    if (user) setBuyer((b) => ({ ...b, email: b.email || user.email || "", name: b.name || (user.user_metadata?.["full_name"] ?? "") }));
   }, [user]);
 
   if (!ev) return null;
@@ -83,14 +83,14 @@ function EventPage() {
       navigate({ to: "/auth", search: { redirect: `/eventos/${slug}` } });
       return;
     }
-    if (!terms) return toast.error("Tenés que aceptar los términos y condiciones");
+    if (!terms) { toast.error("Tenés que aceptar los términos y condiciones"); return; }
     setBusy(true);
     const items = Object.entries(qty).filter(([, q]) => q > 0).map(([category_id, quantity]) => ({ category_id, quantity }));
     const { data, error } = await supabase.rpc("create_order", {
-      p_event_id: ev!.id, p_items: items, p_buyer: buyer, p_rrpp_code: rrpp || undefined,
+      p_event_id: ev!.id, p_items: items, p_buyer: buyer, ...(rrpp ? { p_rrpp_code: rrpp } : {}),
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     navigate({ to: "/orden/$id", params: { id: data as string } });
   }
 
