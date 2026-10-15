@@ -10,14 +10,28 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AyudaRouteImport } from './routes/ayuda'
+import { Route as DevolucionesRouteImport } from './routes/devoluciones'
+import { Route as EscanerRouteImport } from './routes/escaner'
+import { Route as MisEntradasRouteImport } from './routes/mis-entradas'
+import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as RrppRouteImport } from './routes/rrpp'
+import { Route as TerminosRouteImport } from './routes/terminos'
 import { Route as EventosIndexRouteImport } from './routes/eventos.index'
 import { Route as EventosSlugRouteImport } from './routes/eventos.$slug'
+import { Route as OrdenIdRouteImport } from './routes/orden.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -25,9 +39,44 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AyudaRoute = AyudaRouteImport.update({
+  id: '/ayuda',
+  path: '/ayuda',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DevolucionesRoute = DevolucionesRouteImport.update({
+  id: '/devoluciones',
+  path: '/devoluciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EscanerRoute = EscanerRouteImport.update({
+  id: '/escaner',
+  path: '/escaner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MisEntradasRoute = MisEntradasRouteImport.update({
+  id: '/mis-entradas',
+  path: '/mis-entradas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadRoute = PrivacidadRouteImport.update({
+  id: '/privacidad',
+  path: '/privacidad',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RrppRoute = RrppRouteImport.update({
+  id: '/rrpp',
+  path: '/rrpp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TerminosRoute = TerminosRouteImport.update({
+  id: '/terminos',
+  path: '/terminos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventosIndexRoute = EventosIndexRouteImport.update({
@@ -40,48 +89,126 @@ const EventosSlugRoute = EventosSlugRouteImport.update({
   path: '/eventos/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrdenIdRoute = OrdenIdRouteImport.update({
+  id: '/orden/$id',
+  path: '/orden/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/ayuda': typeof AyudaRoute
+  '/devoluciones': typeof DevolucionesRoute
+  '/escaner': typeof EscanerRoute
+  '/mis-entradas': typeof MisEntradasRoute
+  '/privacidad': typeof PrivacidadRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/rrpp': typeof RrppRoute
+  '/terminos': typeof TerminosRoute
   '/eventos/$slug': typeof EventosSlugRoute
+  '/orden/$id': typeof OrdenIdRoute
   '/eventos/': typeof EventosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/ayuda': typeof AyudaRoute
+  '/devoluciones': typeof DevolucionesRoute
+  '/escaner': typeof EscanerRoute
+  '/mis-entradas': typeof MisEntradasRoute
+  '/privacidad': typeof PrivacidadRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/rrpp': typeof RrppRoute
+  '/terminos': typeof TerminosRoute
   '/eventos/$slug': typeof EventosSlugRoute
+  '/orden/$id': typeof OrdenIdRoute
   '/eventos': typeof EventosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/ayuda': typeof AyudaRoute
+  '/devoluciones': typeof DevolucionesRoute
+  '/escaner': typeof EscanerRoute
+  '/mis-entradas': typeof MisEntradasRoute
+  '/privacidad': typeof PrivacidadRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/rrpp': typeof RrppRoute
+  '/terminos': typeof TerminosRoute
   '/eventos/$slug': typeof EventosSlugRoute
+  '/orden/$id': typeof OrdenIdRoute
   '/eventos/': typeof EventosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/reset-password' | '/eventos/$slug' | '/eventos/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/ayuda'
+    | '/devoluciones'
+    | '/escaner'
+    | '/mis-entradas'
+    | '/privacidad'
+    | '/reset-password'
+    | '/rrpp'
+    | '/terminos'
+    | '/eventos/$slug'
+    | '/orden/$id'
+    | '/eventos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/reset-password' | '/eventos/$slug' | '/eventos'
+  to:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/ayuda'
+    | '/devoluciones'
+    | '/escaner'
+    | '/mis-entradas'
+    | '/privacidad'
+    | '/reset-password'
+    | '/rrpp'
+    | '/terminos'
+    | '/eventos/$slug'
+    | '/orden/$id'
+    | '/eventos'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/auth'
+    | '/ayuda'
+    | '/devoluciones'
+    | '/escaner'
+    | '/mis-entradas'
+    | '/privacidad'
     | '/reset-password'
+    | '/rrpp'
+    | '/terminos'
     | '/eventos/$slug'
+    | '/orden/$id'
     | '/eventos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
+  AyudaRoute: typeof AyudaRoute
+  DevolucionesRoute: typeof DevolucionesRoute
+  EscanerRoute: typeof EscanerRoute
+  MisEntradasRoute: typeof MisEntradasRoute
+  PrivacidadRoute: typeof PrivacidadRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  RrppRoute: typeof RrppRoute
+  TerminosRoute: typeof TerminosRoute
   EventosSlugRoute: typeof EventosSlugRoute
+  OrdenIdRoute: typeof OrdenIdRoute
   EventosIndexRoute: typeof EventosIndexRoute
 }
 
@@ -94,6 +221,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -101,11 +235,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ayuda': {
+      id: '/ayuda'
+      path: '/ayuda'
+      fullPath: '/ayuda'
+      preLoaderRoute: typeof AyudaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/devoluciones': {
+      id: '/devoluciones'
+      path: '/devoluciones'
+      fullPath: '/devoluciones'
+      preLoaderRoute: typeof DevolucionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escaner': {
+      id: '/escaner'
+      path: '/escaner'
+      fullPath: '/escaner'
+      preLoaderRoute: typeof EscanerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mis-entradas': {
+      id: '/mis-entradas'
+      path: '/mis-entradas'
+      fullPath: '/mis-entradas'
+      preLoaderRoute: typeof MisEntradasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidad': {
+      id: '/privacidad'
+      path: '/privacidad'
+      fullPath: '/privacidad'
+      preLoaderRoute: typeof PrivacidadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reset-password': {
       id: '/reset-password'
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rrpp': {
+      id: '/rrpp'
+      path: '/rrpp'
+      fullPath: '/rrpp'
+      preLoaderRoute: typeof RrppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terminos': {
+      id: '/terminos'
+      path: '/terminos'
+      fullPath: '/terminos'
+      preLoaderRoute: typeof TerminosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/eventos/': {
@@ -122,14 +305,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventosSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/orden/$id': {
+      id: '/orden/$id'
+      path: '/orden/$id'
+      fullPath: '/orden/$id'
+      preLoaderRoute: typeof OrdenIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
+  AyudaRoute: AyudaRoute,
+  DevolucionesRoute: DevolucionesRoute,
+  EscanerRoute: EscanerRoute,
+  MisEntradasRoute: MisEntradasRoute,
+  PrivacidadRoute: PrivacidadRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  RrppRoute: RrppRoute,
+  TerminosRoute: TerminosRoute,
   EventosSlugRoute: EventosSlugRoute,
+  OrdenIdRoute: OrdenIdRoute,
   EventosIndexRoute: EventosIndexRoute,
 }
 export const routeTree = rootRouteImport
